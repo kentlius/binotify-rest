@@ -1,23 +1,56 @@
-# Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
-This project was bootstrapped with Fastify-CLI.
+# Binotify REST Service
 
-## Available Scripts
+## Skema Basis Data
 
-In the project directory, you can run:
+[`Prisma Schema`](prisma/schema.prisma)
 
-### `npm run dev`
+## Endpoint, payload, dan response API
 
-To start the app in dev mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/20643685-cee84df9-53be-43b2-9e1f-4292472613e6?action=collection%2Ffork&collection-url=entityId%3D20643685-cee84df9-53be-43b2-9e1f-4292472613e6%26entityType%3Dcollection%26workspaceId%3Deb9d48fd-f43b-4993-a857-08f6401860f6)
 
-### `npm start`
+## Daftar Requirement
 
-For production mode
+- NodeJS
+- npm
+- Postgresql
 
-### `npm run test`
+## Cara Instalasi
 
-Run the test cases.
+Clone repository
 
-## Learn More
+```sh
+git clone https://gitlab.informatika.org/if3110-2022-k02-01-06/binotify-rest.git
+```
 
-To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
+Install npm dependencies
+
+```sh
+cd binotify-rest
+npm install
+```
+
+Konfigurasi file `.env`
+
+```sh
+cp .env.example .env
+```
+
+Create database and seeding
+
+```sh
+npx prisma migrate dev --name init
+```
+
+## Cara Menjalankan Server
+
+```sh
+npm run dev
+```
+
+Lalu buka http://localhost:3000/
+
+## Pembagian Tugas
+
+Backend Binotify Premium Fungsi X : 13520xxx, 13520xxx  
+Backend Binotify Premium Fungsi Y : 13520xxx  
+(Lanjutkan …)
