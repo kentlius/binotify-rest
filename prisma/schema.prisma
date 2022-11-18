@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  song_id     Int    @id @default(autoincrement())
+  judul       String @db.VarChar(64)
+  penyanyi_id Int
+  audio_path  String @db.VarChar(256)
+  users       User   @relation(fields: [penyanyi_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model User {
+  user_id  Int     @id @default(autoincrement())
+  email    String  @unique @db.VarChar(256)
+  password String  @db.VarChar(256)
+  username String  @unique @db.VarChar(256)
+  name     String  @db.VarChar(256)
+  isadmin  Boolean @default(false)
+  songs    Song[]
+}
