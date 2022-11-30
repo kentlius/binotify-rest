@@ -7,6 +7,13 @@ module.exports = fp(async (fastify, opts) => {
       cookieName: "token",
       signed: false,
     },
+    formatUser: function (user) {
+      return {
+        user_id: user.user_id,
+        username: user.username,
+        isadmin: user.isadmin,
+      };
+    },
   });
 
   fastify.decorate("authenticate", async (request, reply) => {

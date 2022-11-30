@@ -22,6 +22,8 @@ module.exports = async (fastify, opts) => {
     reply
       .setCookie("token", token, {
         path: "/",
+        httpOnly: true,
+        sameSite: "lax",
       })
       .code(200)
       .send({ token });
