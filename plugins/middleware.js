@@ -17,14 +17,6 @@ module.exports = fp(async (fastify, opts) => {
     }
   });
 
-  fastify.decorate("userBody", async (request, reply) => {
-    if (request.user.user_id == request.body.penyanyi_id) {
-      return;
-    } else {
-      reply.status(401).send({ message: "Unauthorized" });
-    }
-  });
-
   fastify.decorate("songPenyanyi", async (request, reply) => {
     const { id } = request.params;
     const song = await fastify.prisma.song.findUnique({
