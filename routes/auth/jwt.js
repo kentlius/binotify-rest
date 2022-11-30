@@ -15,19 +15,15 @@ module.exports = async (fastify, opts) => {
     }
 
     const token = fastify.jwt.sign({
+      user_id: user.user_id,
       username: username,
       isadmin: user.isadmin,
     });
-    // return { token };
     reply
       .setCookie("token", token, {
-        domain: "localhost",
         path: "/",
-        secure: false,
-        httpOnly: true,
-        sameSite: true,
       })
       .code(200)
-      .send("Cookie sent");
+      .send({ token });
   });
 };

@@ -6,6 +6,7 @@ module.exports = fp(async (fastify, opts) => {
       const corsOptions = {
         // This is NOT recommended for production as it enables reflection exploits
         origin: true,
+        credentials: true,
       };
 
       // do not include CORS headers for requests from localhost
