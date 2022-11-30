@@ -1,5 +1,5 @@
 module.exports = async (fastify, opts) => {
-  fastify.post("/", async (request, reply) => {
+  fastify.post("/", { onRequest: [fastify.authenticate] }, async (request, reply) => {
     const { judul, penyanyi_id, audio_path } = request.body;
     const song = await fastify.prisma.song.create({
       data: {

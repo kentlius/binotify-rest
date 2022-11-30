@@ -1,5 +1,5 @@
 module.exports = async (fastify, opts) => {
-  fastify.delete("/:id", async (request, reply) => {
+  fastify.delete("/:id", { onRequest: [fastify.authenticate] }, async (request, reply) => {
     const { id } = request.params;
     const user = await fastify.prisma.user.delete({
       where: {

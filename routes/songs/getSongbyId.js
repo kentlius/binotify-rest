@@ -1,5 +1,5 @@
 module.exports = async (fastify, opts) => {
-  fastify.get("/:id", async (request, reply) => {
+  fastify.get("/:id", { onRequest: [fastify.authenticate] }, async (request, reply) => {
     const { id } = request.params;
     const song = await fastify.prisma.song.findUnique({
       where: { song_id: +id },

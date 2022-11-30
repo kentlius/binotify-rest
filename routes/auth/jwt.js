@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 
 module.exports = async (fastify, opts) => {
-  fastify.post("/signup", async (request, reply) => {
+  fastify.post("/login", async (request, reply) => {
     const { username, password } = request.body;
     const user = await fastify.prisma.user.findUnique({
       where: {
@@ -13,11 +13,21 @@ module.exports = async (fastify, opts) => {
     if (!match) {
       return reply.code(401).send({ error: "wrong password" });
     }
-    
+
     const token = fastify.jwt.sign({
       username: username,
       isadmin: user.isadmin,
     });
-    return { token };
+    // return { token };
+    reply
+      .setCookie("token", token, {
+        domain: "localhost",
+        path: "/",
+        secure: false,
+        httpOnly: true,
+        sameSite: true,
+      })
+      .code(200)
+      .send("Cookie sent");
   });
 };
