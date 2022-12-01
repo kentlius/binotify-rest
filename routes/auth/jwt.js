@@ -3,18 +3,18 @@ const bcrypt = require("bcryptjs");
 module.exports = async (fastify, opts) => {
   fastify.post("/login", async (request, reply) => {
     const { username, password } = request.body;
-    
+
     const user = await fastify.prisma.user.findUnique({
       where: {
         username,
       },
     });
 
-    if(!user) {
+    if (!user) {
       reply.code(401).send({
         msg: "wrong username or password",
-      })
-    };
+      });
+    }
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
@@ -26,6 +26,7 @@ module.exports = async (fastify, opts) => {
       username: username,
       isadmin: user.isadmin,
     });
+
     reply
       .setCookie("token", token, {
         path: "/",
@@ -33,6 +34,6 @@ module.exports = async (fastify, opts) => {
         sameSite: "lax",
       })
       .code(200)
-      .send({ token });
+      .send({ isadmin: user.isadmin });
   });
 };

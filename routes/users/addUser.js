@@ -17,7 +17,24 @@ module.exports = async (fastify, opts) => {
   };
 
   fastify.post("/", registerSchema, async (request, reply) => {
-    const { username, password, email, name } = request.body;
+    const { name, email, username, password } = request.body;
+    const uname = await fastify.prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+    if (uname) {
+      return reply.code(409).send({ error: "username already exists" });
+    }
+    const emailExist = await fastify.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    if (emailExist) {
+      return reply.code(409).send({ error: "email already exists" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await fastify.prisma.user.create({
       data: {
@@ -27,6 +44,18 @@ module.exports = async (fastify, opts) => {
         username: username,
       },
     });
-    return user;
+    const token = fastify.jwt.sign({
+      user_id: user.user_id,
+      username: username,
+      isadmin: user.isadmin,
+    });
+    reply
+      .setCookie("token", token, {
+        path: "/",
+        httpOnly: true,
+        sameSite: "lax",
+      })
+      .code(200)
+      .send({ token });
   });
 };
