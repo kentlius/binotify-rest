@@ -26,7 +26,10 @@
     "@prisma/client": "^4.6.1",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.9.2",
-    "fastify-cli": "^5.5.1"
+    "fastify-cli": "^5.5.1",
+    "jsontoxml": "^1.0.1",
+    "soap": "^0.45.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "prisma": "^4.6.1",

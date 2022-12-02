@@ -50,7 +50,8 @@ npm run dev
 Lalu buka http://localhost:3000/
 
 ## Pembagian Tugas
-
-Backend Binotify Premium Fungsi X : 13520xxx, 13520xxx  
-Backend Binotify Premium Fungsi Y : 13520xxx  
-(Lanjutkan …)
+Backend Binotify Premium Database: 13520069
+Backend Binotify Premium Fungsi Autentikasi Pengguna : 13520006, 13520069
+Backend Binotify Premium Fungsi Pengelolaan Lagu Premium : 13520069, 13520167 
+Backend Binotify Premium Fungsi List Penyanyi : 13520006,13520069  
+Backend Binotify Premium Fungsi List Lagu dari Penyanyi: 13520069, 13520167  
